@@ -1,0 +1,129 @@
+{% extends 'index.html' %}
+{% block head %}
+    <style>
+        .course-frame{
+            width: 1100px;
+            margin: 0 auto;
+            margin-top: 10px;
+        }
+        .course-content{
+            width: 25%;
+            float: left;
+            text-align: center;
+        }
+        .course-content img{
+            width: 90%;
+            padding: 10px;
+        }
+        .course-content .inner-frame{
+            border: 1px solid #dddddd;
+            margin: 5px;
+            box-shadow: 1px 1px 1px 1px #dddddd;
+        }
+        .course-content .inner-frame .course-name{
+            font-size: 20px;
+            padding: 10px 0 0 0;
+            background-color: #f9f9f9;
+        }
+        .course-content .inner-frame .course-summary{
+            font-size: 13px;
+            padding: 10px 10px;
+            color: #109cec;
+            background-color: #f9f9f9;
+            border-bottom: 1px solid #dddddd;
+        }
+
+    </style>
+{% endblock %}
+{% block pg-body %}
+<div class="course-frame" id="cf">
+    <div class="course-content">
+        <div class="inner-frame">
+{#            另一种方法for循环，用循环的次数除以4求余数：i%4=1，但是循环太多次，效率不高#}
+{#            需要自定义filter函数#}
+        </div>
+    </div>
+    <div class="course-content">
+        <div class="inner-frame">
+{#            i%4=2#}
+        </div>
+    </div>
+    <div class="course-content">
+        <div class="inner-frame">
+{#            i%4=3#}
+        </div>
+    </div>
+    <div class="course-content">
+        <div class="inner-frame">
+{#            i%4=0#}
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block js %}
+<script>
+    //创建对象比使用全局变量要合理一些，有利于协同开发，这样变量就不会重复
+    $(function () {
+        var obj = new ScrollCourse();
+        obj.initCourse();
+        obj.scrollEvent();
+    });
+    function ScrollCourse(){
+        this.nid = 0;
+        this.lastPosition = 3;//-1也可以,保证第一次图片放在0的位置
+        this.initCourse = function () {
+            //this=obj
+            var that = this;//*************************重点
+            $.ajax({
+                url:'/get_course.html',
+                type:'GET',
+                data:{nid:that.nid},
+                dataType:'JSON',
+                success:function (arg) {
+                    var course_list = arg.data;
+                    $.each(course_list,function (index,v) {
+                        //每次从0到6取七张，第二次从3开始，0+2+1=3
+                        var eqv = (index+that.lastPosition+1) % 4;//求余数，0，1，2，3，0，1，2，。。。
+                        //创建一个img标签
+                        var tag = document.createElement('img');
+                        tag.src = v.img;
+                        var divTag = document.createElement('div');
+                        divTag.innerText = v.name;
+                        divTag.className = 'course-name';
+                        var divTag2 = document.createElement('div');
+                        divTag2.innerText = v.summary;
+                        divTag2.className = 'course-summary';
+                        //eq(0)表示第一个孩子，按照0 1 2 3 的顺序循环插图对应ID的孩子里
+                        $('#cf').children().eq(eqv).children().append(tag);
+                        $('#cf').children().eq(eqv).children().append(divTag);
+                        $('#cf').children().eq(eqv).children().append(divTag2);
+                        //当循环到最后一个图片，把最后一张的ID赋值给NID，发送给后台
+                        if(index+1==course_list.length){
+                            //如果数据库有很多照片，把这个注释去掉即可
+                            //that.nid = v.id;
+                            //由于只有七张照片，所以用下面的方法模拟，重复取那7张照片
+                            //最后LASTPOSITION=2,下一次从3开始取
+                            that.lastPosition = eqv;
+                        }
+                    })
+                }
+            })
+        };
+        this.scrollEvent = function () {
+            //this=obj
+            //当滚动高度+窗口高度 = 文档高度时，即滚动到最底部时，
+            // 再执行一次initCourse函数，再发一次ajax请求，继续获取图片
+            var that = this;//*************************重点
+            $(window).scroll(function () {
+                var docHeight = $(document).height();//文档高度
+                var winHeight = $(window).height(); //窗口高度
+                var scrollTop = $(window).scrollTop(); //滚动高度
+                if(docHeight == winHeight + scrollTop){
+                    that.initCourse();
+                }
+            })
+        }
+    }
+</script>
+{% endblock %}

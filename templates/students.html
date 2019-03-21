@@ -1,0 +1,67 @@
+{% extends 'index.html' %}
+{% block head %}
+    <style>
+        a{
+            color: #109cec;
+        }
+        .pg-body .w .outer-frame{
+            margin-top: 30px;
+            border: 1px solid #dddddd;
+        }
+        .pg-body .w .inner-frame{
+            width: 1060px;
+            padding: 15px;
+            margin-left: 4px;
+        }
+        .pg-body .w .inner-frame:after{
+            content: '.';
+            display: block;
+            clear: both;
+            visibility: hidden;
+            height: 0;
+        }
+        .pg-body .w .outer-frame .about-img{
+            width: 1060px;
+            height: 350px;
+            display: inline-block;
+            box-shadow: darkgrey 2px 2px 2px 2px ;
+        }
+        .outer-frame .inner-frame .th-frame{
+            padding: 40px 0;
+            border-bottom: 1px solid #dddddd;
+        }
+        .outer-frame .inner-frame .th-frame:after{
+            content: '.';
+            display: block;
+            clear: both;
+            visibility: hidden;
+            height: 0;
+        }
+        .outer-frame .inner-frame .th-frame img{
+            height: 280px;
+            width: 200px;
+            display: inline-block;
+        }
+        .left{
+            float: left;
+        }
+    </style>
+{% endblock %}
+{% block pg-body %}
+    <div class="outer-frame">
+        <div class="inner-frame">
+            <div><img src="/static/img/students/success.jpg" class="about-img"/></div>
+            {% for row in st_list %}
+                <div class="th-frame">
+                    <div class="left"><img src="{{ row.img }}" /></div>
+                    <div class="left" style="margin-left: 40px;width: 800px;">
+                        <h2>{{ row.name }}</h2>
+                        <p>就业单位：{{ row.company }}</p>
+                        <p>薪资：{{ row.salary }}</p>
+                        <p><a href="/more_info.html?p={{ row.id }}">更多</a></p>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}

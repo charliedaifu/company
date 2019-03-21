@@ -1,0 +1,48 @@
+body {
+    margin: 0;
+}
+.pg-header {
+    height: 50px;
+    background-color: #2459a2;
+}
+.head-title{
+    color: white;
+    padding: 12px 22px;
+    float: left;
+    font-size: 18px;
+    cursor: pointer;
+}
+.pg-header .head-title:hover{
+    background-color: #3976ca;
+}
+.pg-body{
+    width: 1200px;
+    margin: 0 auto;
+    margin-top: 2px;
+}
+.img{
+    height: 300px;
+}
+.course-title{
+    border-left: 2px solid blue;
+    padding: 10px;
+}
+/*a标签不显示下划线*/
+a{
+    text-decoration: none;
+    color: black;
+    cursor: pointer;
+}
+.condition a{
+    display: inline-block;
+    padding: 5px 8px;
+    border: 1px solid #dddddd;
+}
+.condition a.active{
+    background-color: coral;
+    color: white;
+}
+
+.hide{
+    display: none;
+}

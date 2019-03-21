@@ -1,0 +1,85 @@
+{% extends 'index.html' %}
+{% block head %}
+    <style>
+        .pg-body .w .outer-frame{
+            margin-top: 30px;
+            border: 1px solid #dddddd;
+        }
+        .pg-body .w .inner-frame{
+            width: 1060px;
+            padding: 15px;
+            margin-left: 4px;
+        }
+        .pg-body .w .inner-frame:after{
+            content: '.';
+            display: block;
+            clear: both;
+            visibility: hidden;
+            height: 0;
+        }
+        .pg-body .w .outer-frame .about-img{
+            width: 1060px;
+            height: 280px;
+            display: inline-block;
+        }
+        .outer-frame .inner-frame .th-frame{
+            padding: 40px 0;
+            border-bottom: 1px solid #dddddd;
+        }
+        .outer-frame .inner-frame .th-frame:after{
+            content: '.';
+            display: block;
+            clear: both;
+            visibility: hidden;
+            height: 0;
+        }
+        .outer-frame .inner-frame .th-frame img{
+            height: 280px;
+            width: 200px;
+            display: inline-block;
+        }
+        .left{
+            float: left;
+        }
+        .outer-frame .inner-frame .th-frame .th-content{
+            margin-left: 40px;
+            width: 800px;
+        }
+        .outer-frame .inner-frame .th-frame .th-content p{
+            font-size: 16px;
+            text-indent: 30px;
+            line-height: 34px;
+            text-align: justify;
+        }
+        .outer-frame .inner-frame .th-frame .th-content h2{
+            display: inline-block;
+            font-size: 25px;
+            background: #201816;
+            color: white;
+            font-weight: bold;
+            padding: 2px 15px;
+        }
+    </style>
+{% endblock %}
+{% block pg-body %}
+    <div class="outer-frame">
+        <div class="inner-frame">
+            <div><img src="/static/img/teacher.png" class="about-img"/></div>
+            {% for row in th_list %}
+                <div class="th-frame">
+                    <div class="left"><img src="/static/img/course/9.jpg" /></div>
+                    <div class="left th-content">
+                        <h2>{{ row.name }}</h2>
+                        <p>年龄：{{ row.age }}</p>
+                        <p>负责课程：
+                            {% for i in row.course.all %}
+                                {{ i.name }}
+                            {% endfor %}
+                        </p>
+                        <p>简介：{{ row.summary }}</p>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}

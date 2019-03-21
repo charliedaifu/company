@@ -1,0 +1,61 @@
+{% extends 'index.html' %}
+{% block pg-body %}
+    <div class="condition" style="width: 1100px;margin: 0 auto;">
+        <h1>筛选</h1>
+        <div>
+            {% if kwargs.classification_id == 0 %}{# 如果分类ID为0，就显示全部 #}
+                <a class="active" href="/video-0-{{ kwargs.level_id }}-{{ kwargs.status }}.html">全部</a>
+            {% else %}
+                <a href="/video-0-{{ kwargs.level_id }}-{{ kwargs.status }}.html">全部</a>
+            {% endif %}
+            {% for item in class_list %}
+                {% if item.id == kwargs.classification_id %}{# 如果分类ID和请求参数一样，就显示被选中 #}
+                    <a href="/video-{{ item.id }}-{{ kwargs.level_id }}-{{ kwargs.status }}.html" class="active">{{ item.name }}</a>
+                {% else %}
+                    <a href="/video-{{ item.id }}-{{ kwargs.level_id }}-{{ kwargs.status }}.html">{{ item.name }}</a>
+                {% endif %}
+            {% endfor %}
+        </div>
+        <div>
+            {% if kwargs.level_id == 0 %}
+                <a class="active" href="/video-{{ kwargs.classification_id }}-0-{{ kwargs.status }}.html">全部</a>
+            {% else %}
+                <a href="/video-{{ kwargs.classification_id }}-0-{{ kwargs.status }}.html">全部</a>
+            {% endif %}
+            {% for item in level_list %}
+                {% if item.id == kwargs.level_id %}
+                    <a href="/video-{{ kwargs.classification_id }}-{{ item.id }}-{{ kwargs.status }}.html" class="active">{{ item.title }}</a>
+                {% else %}
+                    <a href="/video-{{ kwargs.classification_id }}-{{ item.id }}-{{ kwargs.status }}.html">{{ item.title }}</a>
+                {% endif %}
+            {% endfor %}
+        </div>
+        <div>
+            {% if kwargs.status == 0 %}
+                <a class="active" href="/video-{{ kwargs.classification_id }}-{{ kwargs.level_id }}-0.html">全部</a>
+            {% else %}
+                <a href="/video-{{ kwargs.classification_id }}-{{ kwargs.level_id }}-0.html">全部</a>
+            {% endif %}
+            {% for item in status_list %}
+                {% if item.0 == kwargs.status %}
+                    <a href="/video-{{ kwargs.classification_id }}-{{ kwargs.level_id }}-{{ item.0 }}.html" class="active">{{ item.1 }}</a>
+                {% else %}
+                    <a href="/video-{{ kwargs.classification_id }}-{{ kwargs.level_id }}-{{ item.0 }}.html">{{ item.1 }}</a>
+                {% endif %}
+            {% endfor %}
+        </div>
+    </div>
+    <div>
+        <h1>结果</h1>
+        <div>
+            {% for row in video_list %}
+                <div style="float: left;margin: 0 20px;border: 1px solid #dddddd;">
+                    <a>
+                        <img src="{{ row.img }}" style="height: 150px;width: 200px;"/>
+                        <div style="font-size: 15px;text-align: center;">{{ row.name }}</div>
+                    </a>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}

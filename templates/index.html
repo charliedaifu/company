@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    {% load staticfiles %}
+    <link rel="stylesheet" href="/static/css/qq.css"/>
+    <link rel="stylesheet" href="{% static 'css/default_style.css' %}"/>
+    <link rel="stylesheet" href="{% static 'plugins/bxslider/dist/jquery.bxslider.css' %}"/>
+    <link rel="stylesheet" href="{% static 'plugins/font-awesome/css/font-awesome.css' %}"/>
+
+    {% block head %}
+    {% endblock %}
+    <style>
+        .pg-header .w img.logo {
+            height: 40px;
+            width: 100px;
+            float: left;
+            margin-top: 5px;
+        }
+
+        .pg-body .w .slider div a img.img {
+            width: 1190px;
+            height: 360px;
+        }
+
+        .w {
+            width: 1100px;
+            margin: 0 auto;
+        }
+
+        .course-img {
+            height: 260px;
+            width: 200px;
+        }
+
+        .backtop {
+            position: fixed;
+            bottom: 10px;
+            right: 10px;
+            background-color: red;
+            cursor: pointer;
+            height: 60px;
+            width: 60px;
+            font-size: 12px;
+            text-align: center;
+        }
+
+        .pg-footer .w .footer-content {
+            background-color: #dddddd;
+            height: 60px;
+            clear: both;
+            text-align: center;
+        }
+
+        .pg-footer .w .footer-content span {
+            padding: 0 40px;
+        }
+
+        .pg-footer .w .footer-blank {
+            height: 60px;
+            border-bottom: 1px solid black;
+            clear: both;
+        }
+
+        a {
+            color: #109cec;
+        }
+
+        .course {
+            height: 200px;
+            clear: both;
+        }
+        .pg-header .w .head-title.active{
+            color: #fff;
+            background-color: #204982;
+        }
+    </style>
+</head>
+<body>
+<div class="pg-header">
+    <div class="w">
+        <div><a><img src="static/img/sliders/1.jpg" class="logo"></a></div>
+        <div><a href="/index.html" class="head-title active" style="margin-left: 20px" >首页</a></div>
+        <div><a href="/teachers.html" class="head-title">师资团队</a></div>
+        <div><a href="/video2-0-0-0.html" class="head-title">在线视频</a></div>
+        <div><a href="/course.html" class="head-title">课程简介</a></div>
+        <div><a href="/students.html" class="head-title">学员就业</a></div>
+        <div><a href="#" class="head-title">常见问题</a></div>
+        <div><a href="/aboutUs.html" class="head-title">关于我们</a></div>
+        <div class="head-title" style="float: right;">
+            <i class="fa fa-headphones fa-lg" aria-hidden="true"></i>
+            010-337845818
+        </div>
+    </div>
+</div>
+
+<div class="pg-body">
+    <div class="w">
+        {% block pg-body %}
+            <div class="slider">
+                {% for row in slider_obj %}
+                    <div>
+                        <a href="{{ row.target }}"><img src="{{ row.img }}" class="img"></a>
+                    </div>
+                {% endfor %}
+            </div>
+            <div class="course">
+                <h2 class="course-title">企业公告</h2>
+                {% for row in notice_obj %}
+                    <div style="width: 270px;float: left;">
+                        <p>{{ row.title }}</p>
+                        <p><a href="#">更多</a></p>
+                    </div>
+                {% endfor %}
+            </div>
+
+            <div class="course">
+                <h2 class="course-title">课程介绍</h2>
+                {% for row in course_obj %}
+                    <div style="width: 270px;float: left;">
+                        <a href="#">
+                            <h3>{{ row.name }}</h3>
+                            <img src="{{ row.img }}" class="course-img">
+                        </a>
+                        <div>{{ row.summary }}</div>
+                    </div>
+                {% endfor %}
+            </div>
+            <div class="course" style="padding: 30px 0">
+                <h2 class="course-title">校园生活</h2>
+                <div style="width: 270px;float: left;">
+                    <img src="/static/img/course/1.jpg" class="course-img"/>
+                </div>
+                <div style="width: 270px;float: left;">
+                    <img src="/static/img/course/7.jpg" class="course-img"/>
+                </div>
+            </div>
+        {% endblock %}
+    </div>
+</div>
+
+<div class="pg-footer">
+    <div class="w">
+        <div class="footer-blank"></div>
+        <div class="footer-content">
+            <span>欢迎加入我们的大家庭</span>
+            <span>欢迎致电：337845818</span>
+        </div>
+    </div>
+</div>
+
+<div class="qq">
+    <div id="floatTools" class="rides-cs" style="height:246px;">
+        <div class="floatL">
+            <a id="aFloatTools_Show" class="btnOpen" title="查看在线客服" style="top:20px;display:block"
+               href="javascript:void(0);">展开</a>
+            <a id="aFloatTools_Hide" class="btnCtn" title="关闭在线客服" style="top:20px;display:none"
+               href="javascript:void(0);">收缩</a>
+        </div>
+        <div id="divFloatToolsView" class="floatR" style="display: none;height:237px;width: 140px;">
+            <div class="cn">
+                <h3 class="titZx">在线客服</h3>
+                <ul>
+                    <li><span>客服1</span> <a target="_blank"
+                                            href="http://wpa.qq.com/msgrd?v=3&amp;uin=123456789&amp;site=qq&amp;menu=yes"><img
+                            border="0" src="http://demo.lanrenzhijia.com/2014/service1031/images/online.png"
+                            alt="点击这里给我发消息" title="点击这里给我发消息"></a></li>
+                    <li><span>客服2</span> <a target="_blank"
+                                            href="http://wpa.qq.com/msgrd?v=3&amp;uin=123456789&amp;site=qq&amp;menu=yes"><img
+                            border="0" src="http://demo.lanrenzhijia.com/2014/service1031/images/online.png"
+                            alt="点击这里给我发消息" title="点击这里给我发消息"></a></li>
+                    <li><span>客服3</span> <a target="_blank"
+                                            href="http://wpa.qq.com/msgrd?v=3&amp;uin=123456789&amp;site=qq&amp;menu=yes"><img
+                            border="0" src="http://demo.lanrenzhijia.com/2014/service1031/images/online.png"
+                            alt="点击这里给我发消息" title="点击这里给我发消息"></a></li>
+                    <li style="border:none;"><span>电话：400-000-0000</span></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="c1" class="backtop hide" onclick="backTop();">
+    <div><i class="fa fa-angle-double-up fa-3x" aria-hidden="true"></i></div>
+    返回顶部
+</div>
+
+<script src="{% static 'js/jquery-3.3.1.js' %}"></script>
+<script src="{% static 'plugins/bxslider/dist/jquery.bxslider.js' %}"></script>
+<script src="/static/js/qq.js"></script>
+
+{% block js %}
+{% endblock %}
+<script>
+    $(function () {
+        $('.slider').bxSlider({
+            auto: true,
+            slideWidth: 1200,//宽度
+            pause: 4000,//跳转时间
+        });
+    });
+    // 绑定失败？？？？？问题出在：一点击页面会刷新，又回到初始状态，所以一直是首页被选中
+    $(function () {
+        $('a[class="head-title"]').click(function () {
+            if($(this).hasClass('active')){
+                $(this).parent().siblings().find('a').removeClass('active');
+            }else{
+                $(this).addClass('active');
+                $(this).parent().siblings().find('a').removeClass('active');
+            }
+        })
+    });
+
+
+
+    function backTop() {
+        $('body,html').animate({scrollTop: 0}, 10);
+    }
+
+    $(function () {
+        $(window).scroll(function () {
+            if ($(window).scrollTop() > 100) {
+                $("#c1").removeClass('hide');
+            } else {
+                $("#c1").addClass('hide');
+            }
+        })
+    });
+
+</script>
+</body>
+</html>

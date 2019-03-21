@@ -1,0 +1,84 @@
+{% extends 'index.html' %}
+{% block head %}
+    <style>
+        a{
+            text-decoration: none;
+        }
+        .pg-body .w .outer-frame{
+            margin-top: 30px;
+            border: 1px solid #dddddd;
+        }
+        .pg-body .w .inner-frame{
+            width: 980px;
+            padding: 30px;
+            margin-left: 18px;
+        }
+
+        .about-head h1 a{
+            color: red;
+        }
+        h1{
+            color: red;
+            text-align: center;
+        }
+        .outer-frame .inner-frame ul li{
+            font-size: 20px;
+            padding: 10px;
+            color: #666666;
+        }
+        br{
+            height: 2px;
+            background-color: red;
+        }
+        .thanks{
+            margin: 0 auto;
+            height: 40px;
+        }
+        .thanks a{
+            font-size: 24px;
+            background: #E10B1E;
+            color: white;
+            width: 260px;
+            height: 40px;
+            margin: 0 15px;
+            float: left;
+            text-align: center;
+            line-height: 40px;
+            font-weight: bold;
+        }
+        .thanks i{
+            width: 345px;
+            float: left;
+            display: block;
+            height: 1px;
+            background: #E10B1E;
+            margin-top: 19px;
+        }
+    </style>
+{% endblock %}
+{% block pg-body %}
+    <div class="outer-frame" id="cp-content">
+        <div class="inner-frame">
+            <h1>老男孩IT教育</h1>
+            <h1>喜报连连，口碑胜于雄辩！</h1>
+            <div class="thanks">
+                <i></i>
+                <a href="javascript:void(0);">学员访谈</a>
+                <i></i>
+            </div>
+            <div>
+                {% for row in more_info %}
+                    <h2 style="margin-top: 40px;text-align: center">
+                        {{ row.letter__title }}
+                    </h2><p style="margin-top: 40px;">
+                        {{ row.letter__content }}
+                    </p>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+{% endblock %}
+{% block js %}
+    <script>
+    </script>
+{% endblock %}

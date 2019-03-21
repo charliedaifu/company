@@ -1,0 +1,166 @@
+{% extends 'index.html' %}
+{% block head %}
+    <style>
+        a{
+            text-decoration: none;
+        }
+        .pg-body .w .outer-frame{
+            margin-top: 30px;
+            border: 1px solid #dddddd;
+        }
+        .pg-body .w .inner-frame{
+            width: 980px;
+            min-height: 300px;
+            padding: 30px;
+            margin-left: 18px;
+        }
+        .pg-body .w .outer-frame .about-img{
+            width: 1000px;
+            display: inline-block;
+            box-shadow: darkgrey 2px 2px 2px 2px ;
+        }
+        .pg-body .w .about-head{
+            border-bottom: 3px solid #109cec;
+            margin-top: 30px;
+        }
+        .pg-body .w .about-head:after{
+            content: '.';
+            display: block;
+            clear: both;
+            visibility: hidden;
+            height: 0;
+        }
+        .left{
+            float: left;
+        }
+        .about-head h1.title{
+            margin-left: 150px;
+            text-align: center;
+        }
+        .about-head h1 a{
+            color: red;
+        }
+
+        .outer-frame .inner-frame ul li{
+            font-size: 20px;
+            padding: 10px;
+            color: #666666;
+        }
+        .about-head a.active{
+            background-color: #f1f1f1;
+            padding: 10px 20px;
+        }
+    </style>
+{% endblock %}
+{% block pg-body %}
+    <div class="about-head">
+        <h1 class="title left "><a href="javascript:void(0);" id="cp" class="active">公司简介</a></h1>
+        <h1 class="title left"><a href="javascript:void(0);" id="cd">公司发展史</a></h1>
+        <h1 class="title left"><a href="javascript:void(0);" id="ca">公司地址</a></h1>
+    </div>
+    <div class="outer-frame" id="cp-content">
+        <div class="inner-frame">
+            <div><img src="/static/img/about_us.jpg" class="about-img"/></div>
+            <h1>公司简介</h1>
+            <p style="margin-bottom: 20px;">
+                <span style="font-size: 14px;">
+                　　短短数小时，就有近 10 万人浏览这个问题。不仅如此，据 AI 前线爆料，贾扬清离开 Facebook 之后将加盟阿里硅谷研究院担任 VP，于今年 3 月 11 日正式入职。
+                </span>
+            </p>
+            <p style="margin-bottom: 20px;">
+                <span style="font-size: 14px;">
+                　　新智元向贾扬清本人及阿里方面求证，对方均未回复。3 月 27 号的 ScaledML 会议议程中，贾扬清也是作为 Facebook AI 架构总监出席。
+                </span>
+            </p>
+            <p style="margin-bottom: 20px;">
+                <span style="font-size: 14px;">
+                　　另一方面，贾扬清离职的消息在业内已经传播，杜克大学教授陈怡然也发微博称：阿里硅谷研究院从此开启“一硬一软”两大学霸天王领导模式，在 AI 研究领域势如破竹。
+                </span>
+            </p>
+            <p style="margin-bottom: 20px;">
+                <span style="font-size: 14px;">
+                　　老男孩IT教育在国内IT行业享有广泛赞誉，公司凭借高品质的职业IT训练和毕业学员的良好口碑，在行业内一展雄姿。截止到目前为止，公司已培养数千名VIP学生，间接影响百万IT群体，毕业学员平均工资在毕业一年内平均12K以上，高级架构班平均就业20K以上，而以往同学从0基础到掌握课程内容70%以上即可月薪过万元。目前，从老男孩IT教育毕业的学员，很多已经就职于北京知名互联网企业：小米手机，京东商城，蓝讯，快网，淘宝，阿里，支付宝，新浪网，搜狐，腾讯，58同城，赶集，和讯，世纪佳缘，当当网，中国移动，中国联通等，也有很多在中小型企业任核心运维及运维经理总监职位(寻医问药总监，互动百科总监，盈科律云总监，合力金桥总监等)，累计为行内其他的培训机构讲师深入培训20人以上。
+                </span>
+            </p>
+            <p style="margin-bottom: 20px;">
+                <span style="font-size: 14px;">
+                　　公司秉承“老男孩IT教育，只培养技术精英”，因为专注，所以卓越。
+                </span>
+            </p>
+        </div>
+    </div>
+    <div class="outer-frame hide" id="cd-content">
+        <div class="inner-frame">
+            <h1>公司发展史</h1>
+            <ul>
+                <li>
+                    2017年
+                    老男孩教育已成为业内   Linux运维、Python开发  课程学习的首选机构
+                    老男孩老师、Alex老师 同时被评选为 51CTO 2017年最受学员喜爱的10大讲师
+                    国内首家开始GO语言课程
+                </li>
+                <li>
+                    2016年
+                    老男孩老师、Alex老师 同时被评选为 51CTO 2016年最受学员喜爱的10大讲师
+                    开设大数据开发课程
+                    开设首期Python全栈脱产班课程，
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="outer-frame hide" id="ca-content">
+        <div class="inner-frame">
+            <h1>公司地址</h1>
+        </div>
+    </div>
+{% endblock %}
+{% block js %}
+    <script>
+        $(function () {
+            showContent();
+        });
+        function showContent() {
+            $('#cp').click(function () {
+                $('#cp-content').removeClass('hide');
+                $('#cd-content').addClass('hide');
+                $('#ca-content').addClass('hide');
+                if($(this).hasClass('active')){
+                    $('#cd').removeClass('active');
+                    $('#ca').removeClass('active');
+                }else{
+                    $(this).addClass('active');
+                    $('#cd').removeClass('active');
+                    $('#ca').removeClass('active');
+                }
+
+            });
+            $('#cd').click(function () {
+                $('#cd-content').removeClass('hide');
+                $('#cp-content').addClass('hide');
+                $('#ca-content').addClass('hide');
+                if($(this).hasClass('active')){
+                    $('#cp').removeClass('active');
+                    $('#ca').removeClass('active');
+                }else{
+                    $(this).addClass('active');
+                    $('#cp').removeClass('active');
+                    $('#ca').removeClass('active');
+                }
+            });
+            $('#ca').click(function () {
+                $('#ca-content').removeClass('hide');
+                $('#cp-content').addClass('hide');
+                $('#cd-content').addClass('hide');
+                if($(this).hasClass('active')){
+                    $('#cd').removeClass('active');
+                    $('#cp').removeClass('active');
+                }else{
+                    $(this).addClass('active');
+                    $('#cd').removeClass('active');
+                    $('#cp').removeClass('active');
+                }
+            })
+        }
+
+    </script>
+{% endblock %}
